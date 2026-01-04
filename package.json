@@ -1,0 +1,16 @@
+{
+  "name": "sd-webui-syntax-highlighting",
+  "module": "src/main.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "bun build --minify ./src/main.ts --outdir ./javascript --outfile=main.js"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "shiki": "^3.20.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

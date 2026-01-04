@@ -1,0 +1,59 @@
+/* The existing text prompt */
+#txt2img_prompt > label > textarea,
+#txt2img_neg_prompt > label > textarea,
+#img2img_prompt > label > textarea,
+#img2img_neg_prompt > label > textarea {
+    /* Place the textarea on top of the syntax highlighting to allow the user to edit the text */
+    z-index: 1;
+
+    /* Then make the textarea invisible, keeping the caret intact but hiding the text, 
+        allowing the syntax highlighting colors to take over */
+    color: transparent;
+    background: transparent;
+    caret-color: white;
+
+    height: auto !important;
+}
+
+/* The new syntax-highlighted prompt */
+#txt2img_prompt > label > div.sd-webui-syntax-highlighting,
+#txt2img_neg_prompt > label > div.sd-webui-syntax-highlighting,
+#img2img_prompt > label > div.sd-webui-syntax-highlighting,
+#img2img_neg_prompt > label > div.sd-webui-syntax-highlighting {
+    background: var(--input-background-fill);
+    border: 1px solid transparent;
+
+    overflow-y: hidden;
+}
+
+/* Shared values between the original text prompt and the new syntax-highlighted prompt */
+#txt2img_prompt > label > textarea,
+#txt2img_neg_prompt > label > textarea,
+#img2img_prompt > label > textarea,
+#img2img_neg_prompt > label > textarea,
+#txt2img_prompt > label > div.sd-webui-syntax-highlighting,
+#txt2img_neg_prompt > label > div.sd-webui-syntax-highlighting,
+#img2img_prompt > label > div.sd-webui-syntax-highlighting,
+#img2img_neg_prompt > label > div.sd-webui-syntax-highlighting {
+    position: absolute;
+    inset: 0;
+    
+    font-family: monospace;
+    font-size: 16px;
+    line-height: 1.3;
+
+    padding: 5px;
+    border-width: 1px;
+    border-radius: var(--input-radius);
+}
+
+/* Edge-case for some browser styles */
+#txt2img_prompt > label > div.sd-webui-syntax-highlighting > pre,
+#txt2img_neg_prompt > label > div.sd-webui-syntax-highlighting > pre,
+#img2img_prompt > label > div.sd-webui-syntax-highlighting > pre,
+#img2img_neg_prompt > label > div.sd-webui-syntax-highlighting > pre {
+    margin: 0;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
+
