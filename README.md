@@ -1,2 +1,23 @@
 # sd-webui-syntax-highlighting
-Prompt syntax highlighting for Stable Diffusion WebUI
+
+An extension for Stable Diffusion WebUI (A1111/Forge/reForge/Forge Classic, etc.) that adds highlighting to the prompts.
+
+## Preview
+
+// todo
+
+
+## Development
+
+To install dependencies:
+
+```bash
+bun install
+```
+
+To build:
+
+```bash
+bun run build
+```
+
