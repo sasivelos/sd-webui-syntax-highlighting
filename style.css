@@ -47,6 +47,14 @@
     border-radius: var(--input-radius);
 }
 
+/* Due to the use of position: absolute, we have to manually specify a height */
+#txt2img_prompt,
+#txt2img_neg_prompt,
+#img2img_prompt,
+#img2img_neg_prompt {
+    min-height: 260px;
+}
+
 /* Edge-case for some browser styles */
 #txt2img_prompt > label > div.sd-webui-syntax-highlighting > pre,
 #txt2img_neg_prompt > label > div.sd-webui-syntax-highlighting > pre,
