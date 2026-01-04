@@ -4,7 +4,7 @@ An extension for Stable Diffusion WebUI (A1111/Forge/reForge/Forge Classic, etc.
 
 ## Preview
 
-// todo
+![Preview](./assets/preview.webp "Syntax highlighting preview")
 
 
 ## Development
