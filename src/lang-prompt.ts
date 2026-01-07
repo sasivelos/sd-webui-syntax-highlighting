@@ -96,7 +96,7 @@ const promptLanguage = {
 
         // Support some syntax from various SD WebUI extensions
         {
-            begin: "{",
+            begin: "\\{",
             beginCaptures: {
                 0: {
                     name: "extension.wildcard.inline.bracket.left"
@@ -110,6 +110,9 @@ const promptLanguage = {
             },
             contentName: "extension.wildcard.inline.text",
             patterns: [
+                {
+                    include: "$self"
+                },
                 {
                     match: "\\|",
                     name: "extension.wildcard.inline.vertical.bar"
