@@ -5,8 +5,20 @@ const promptLanguage = {
     displayName: "SD WebUI Prompt",
     scopeName: "source.sd-webui-prompt",
     patterns: [
+        // Supported by most if not all SD WebUIs
         {
             match: "#.*$",
+            name: "comment"
+        },
+
+        // The '//' and '/* */' syntax are only for reForge & Forge Classic
+        {
+            match: "//.*$",
+            name: "comment"
+        },
+        {
+            begin: "/\\*",
+            end: "\\*/",
             name: "comment"
         },
 
