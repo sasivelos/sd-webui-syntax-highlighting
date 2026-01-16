@@ -12,6 +12,27 @@ const extensionPrintError = (text: string) => {
     console.error("[sd-webui-syntax-highlighting] " + text);
 };
 
+// Update a <textarea> to dispatch an event whenever its textarea.value changes
+const updateMutatorsForTextarea = (textarea: HTMLTextAreaElement) => {
+    var elementPrototype = Object.getPrototypeOf(textarea);
+    var nativeValueDesc = Object.getOwnPropertyDescriptor(elementPrototype, "value");
+
+    Object.defineProperty(textarea, "value", {
+        configurable: true,
+        enumerable: true,
+
+        get() {
+            return nativeValueDesc?.get?.call(this);
+        },
+
+        set(value) {
+            nativeValueDesc?.set?.call(this, value);
+
+            this.dispatchEvent(new Event("on-value-var-change"));
+        }
+    })
+};
+
 // Wait until Gradio elements are loaded
 onUiLoaded(async() => {
     const highlighter = await createHighlighterCore({
@@ -70,19 +91,20 @@ onUiLoaded(async() => {
             innerLabel?.appendChild(highlightedText)
 
             if (innerTextarea) {
-                // When the user types inside the <textarea>
-                innerTextarea.addEventListener("input", () => {
+                // TL;DR:
+                // When the user uses Gradio actions (e.g. "apply all selected styles to prompt", sending from PNG info to txt2img, etc.),
+                // it has to be detected. (the "input" and "change" JavaScript event listeners don't catch it)
+                //
+                // We create a custom getter/setter for each textarea that dispatches the event "on-value-var-change"
+                // and updates the syntax highlighting accordingly.
+                updateMutatorsForTextarea(innerTextarea);
+
+                innerTextarea.addEventListener("on-value-var-change", () => {
                     updatePromptHighlighting(
                         innerTextarea,
                         highlightedText
                     );
-                });
-                innerTextarea.addEventListener("change", () => {
-                    updatePromptHighlighting(
-                        innerTextarea,
-                        highlightedText
-                    );
-                });
+                })
 
                 // Manually trigger highlighting right away, since the event listener only updates it on user input,
                 // meaning the box won't be visible on UI first start
